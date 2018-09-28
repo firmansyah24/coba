@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const Products = require ('../dispatchers/users')
 
-/* GET users listing. */
 router.get('/', function(req, res) {
   Products
   .Products

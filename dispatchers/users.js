@@ -38,10 +38,30 @@ module.exports = {
             )
         },
         getOrderById: function(id) {
-            return knex ('Orders').where("id", id)
+            return knex ('Orders').where("Orders.id", id)
+            .leftJoin('Users', { 'Orders.user_id': 'Users.id' })
+            .leftJoin('Products', { 'Orders.product_id': 'Products.id' })
+            .select(
+                'Orders.id',
+                "Users.firstname as Who's Order",
+                'Products.name as Name Order',
+                'Products.price as Price'
+            )
         },
         postNewOrder: function(Orders) {
             return knex ('Orders').insert(Orders).returning('Orders')
+        }
+    },
+    Images: {
+        getAllImages: function() {
+            return knex ('Images')
+        },
+        getImagesById: function(id) {
+            return knex ('Images').where('Images.id', id)
+            .leftJoin('Products', { 'Images.product_id': 'Products.id' })
+        },
+        postNewImage: function(Images) {
+            return knex ('Images').insert(Images).returning('Images')
         }
     }
 }

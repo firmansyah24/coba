@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const Orders = require ('../dispatchers/users')
 
-/* GET users listing. */
 router.get('/', function(req, res) {
   Orders
   .Orders
